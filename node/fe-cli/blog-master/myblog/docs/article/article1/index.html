@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">1秒点击</button>
+    <button id="btn2">2秒点击</button>
+    <input id="input1"></input>
+<script>
+    let btn1 = document.getElementById('btn1');
+    let btn2 = document.getElementById('btn2');
+    let input1 = document.getElementById('input1');
+    btn1.addEventListener('click', throttle(action1,1000))
+    btn2.addEventListener('click', throttle(action2,2000))
+    input1.addEventListener('keyup',debounce(action3,1000));
+    function action3(){
+        console.log(input1.value)
+    }
+    function action1() {
+        console.log('1秒点击一次')
+    }
+    function action2() {
+        console.log('2秒点击一次')
+    }
+    function throttle(fn, wait=500) {
+        let timer;
+        return function (...args) {
+            // console.log(timer)
+            if(timer == null) { 
+                timer = setTimeout(() => timer = null, wait)
+                return fn.apply(this, args);
+            }
+        }
+    }
+    function debounce(fn, wait) {
+        let timeout = null
+        return function() {
+            if(timeout !== null){
+                clearTimeout(timeout)     
+            }
+            timeout = setTimeout(fn, wait);
+        }
+    }
+</script>
+</body>
+</html>
