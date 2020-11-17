@@ -3,12 +3,22 @@
  * @author: zhongconghai
  * @Date: 2020-11-17 22:23:01
  * @LastEditors: zhongconghai
- * @LastEditTime: 2020-11-17 22:25:22
+ * @LastEditTime: 2020-11-17 22:52:13
  -->
 
--[ ]1. 介绍一下 js 的数据类型有哪些,值是如何存储的
+1. 介绍一下 js 的数据类型有哪些,值是如何存储的
 
--[x]2. && 、 ||和!! 运算符分别能做什么
+   - 基本数据类型和饮用数据类型，基本数据类型：number， string， undefined， null， boolean， bigInt， symbol
+     引用数据类型： object
+   - bigInt：大数
+   - symbol：独一无二的数
+   - typeof null : object, typeof 根据底层二进制类判断，前三位为 0 判断为 object，null 符合条件
+   - 存储：基本数据类型存在栈中
+     引用数据类型实体存在堆中，定义的属性名存在栈中，它存储了指向堆中数据指针
+
+2. && 、 ||和!! 运算符分别能做什么
+
+- 逻辑与，逻辑或，布尔转换
 
 3. js 的数据类型的转换
 
