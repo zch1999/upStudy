@@ -1,0 +1,29 @@
+<!--
+ * @file: description
+ * @author: zhongconghai
+ * @Date: 2020-11-22 18:49:17
+ * @LastEditors: zhongconghai
+ * @LastEditTime: 2020-11-22 20:32:39
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ol>
+    <li class="dd1">1</li>
+    <li class="dd2">2</li>
+    <li class="dd3">3</li>
+  </ol>
+  <script>
+    const ol1 = document.querySelector('ol');
+    ol1.addEventListener('click', () => {
+      const li1 = document.getElementsByClassName('dd1');
+      console.log(li1)
+    }, true)
+  </script>
+</body>
+</html>

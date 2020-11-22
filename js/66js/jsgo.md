@@ -3,7 +3,7 @@
  * @author: zhongconghai
  * @Date: 2020-11-17 22:23:01
  * @LastEditors: zhongconghai
- * @LastEditTime: 2020-11-17 22:52:13
+ * @LastEditTime: 2020-11-22 18:46:49
  -->
 
 1. 介绍一下 js 的数据类型有哪些,值是如何存储的
@@ -18,23 +18,48 @@
 
 2. && 、 ||和!! 运算符分别能做什么
 
-- 逻辑与，逻辑或，布尔转换
+   - 逻辑与(返回操作数中第一个虚值表达式，或最后一个真值表达式)，逻辑或（返回操作数中第一个真值表达式），布尔转换
 
 3. js 的数据类型的转换
 
-4. JS 中数据类型的判断（ typeof，instanceof，constructor，Object.prototype.toString.call()
+   - 转换为布尔值
+   - 转换为数字 []转为数字 0，数组里有一个元素且为数字或字符数字转换为对应数字
+   - 转换为字符串 对象-> [Object,Object]
+
+4. JS 中数据类型的判断（ typeof，instanceof，constructor，Object.prototype.toString.call())
+
+   - typeof 原始类型除了 null 都能判断出相应的类型，引用类型除了 function 其余都是 object， typeof 判断是根据底层数据类型二进制表示来判断的，null 的后三位刚好为 000 所以也被判断为 object
+   - instanceof 根据实例是否处于原型链上来判断，注意只有实例才能判断，例如**1 instanceof Number // false；new Number(1) instanceof Number //true**
+   - constructor 主要是利用原型上的 prototype.constructor 指向实例的构造函数来判断， **console.log('1'.constructor === String); // true； console.log(new Number(1).constructor === Number); // true**, null,undefined 没有 constructor，当改写 function 对象的 prototype 后，原有的 constructor 引用丢失，默认为 Object
+   - Object.prototype.toString.call() 通过 call 改变指向，来实现类型判断，Object.prototype.toString() // [Object,Object]; Object.prototype.toString.call([]) // [Object,Array];
 
 5. 介绍 js 有哪些内置对象？
 
+   - array，string, Date, Regexp, Map, Set。。。
+
 6. undefined 与 undeclared 的区别？
+
+   - 在作用域中已声明未赋值，未声明
 
 7. null 和 undefined 的区别？
 
+   - null 表示一个空值，undefined 表示未定义
+
 8. {} 和 [] 的 valueOf 和 toString 的结果是什么？
+
+   - {} 的 valueOf 结果为 {} ，toString 的结果为 "[object Object]"
+
+   - [] 的 valueOf 结果为 [] ，toString 的结果为 ""
+
+   - 一般来说，用操作符+，-之类的对对象进行转换的话 valueOf 优先级高于 toString。
 
 9. Javascript 的作用域和作用域链？
 
+   - 作用域一般来说就是定义变量的一个区域，他有一套访问变量的规则，一般来说就是沿着作用域链来查找变量
+
 10. javascript 创建对象的几种方式？
+
+    - new Object.create()
 
 11. JavaScript 继承的几种实现方式？
 
@@ -44,47 +69,59 @@
 
 14. JavaScript 原型，原型链？有什么特点？
 
+    - js 对象都有一个原型即*proto*,它指向原型对象的 prototype 属性，prototype 属性包括了 constroctor 指向实例的构造函数，prototype 的*proto*又指向它的原型对象
+
 15. js 获取原型的方法？
+
+    - p.proto
+
+    - p.constructor.prototype
+
+    - Object.getPrototypeOf(p)
 
 16. 什么是闭包，为什么要用它？
 
-17. 什么是 DOM 和 BOM？
+    - 保存变量的函数
 
-18. 三种事件模型是什么？
+    - 作用：1. 在函数外部可以访问到函数内部的变量 2. 保存执行完的函数中的变量
 
-19. 事件委托是什么？
+17) 什么是 DOM 和 BOM？
 
-20. 什么是事件传播?
+18) 三种事件模型是什么？
 
-21. 什么是事件捕获？
+19) 事件委托是什么？
 
-22. 什么是事件冒泡？
+20) 什么是事件传播?
 
-23. DOM 操作——怎样添加、移除、移动、复制、创建和查找节点？
+21) 什么是事件捕获？
 
-24. js 数组和对象有哪些原生方法,列举一下
+22) 什么是事件冒泡？
 
-25. 常用的正则表达式
+23) DOM 操作——怎样添加、移除、移动、复制、创建和查找节点？
 
-26. Ajax 是什么? 如何创建一个 Ajax？
+24) js 数组和对象有哪些原生方法,列举一下
 
-27. js 延迟加载的方式有哪些？
+25) 常用的正则表达式
 
-28. 谈谈你对模块化开发的理解？
+26) Ajax 是什么? 如何创建一个 Ajax？
 
-29. js 的几种模块规范？
+27) js 延迟加载的方式有哪些？
 
-30. AMD 和 CMD 规范的区别？
+28) 谈谈你对模块化开发的理解？
 
-31. ES6 模块与 CommonJS 模块、AMD、CMD 的差异。
+29) js 的几种模块规范？
 
-32. requireJS 的核心原理是什么？
+30) AMD 和 CMD 规范的区别？
 
-33. 谈谈 JS 的运行机制
+31) ES6 模块与 CommonJS 模块、AMD、CMD 的差异。
 
-34. arguments 的对象是什么？
+32) requireJS 的核心原理是什么？
 
-35. 为什么在调用这个函数时，代码中的`b`会变成一个全局变量?
+33) 谈谈 JS 的运行机制
+
+34) arguments 的对象是什么？
+
+35) 为什么在调用这个函数时，代码中的`b`会变成一个全局变量?
 
 36.简单介绍一下 V8 引擎的垃圾回收机制
 
@@ -104,7 +141,7 @@
 
 44. 什么是对象解构？
 
-45 什么是`Set`对象，它是如何工作的？
+45. 什么是`Set`对象，它是如何工作的？
 
 46. 什么是 Proxy？
 
