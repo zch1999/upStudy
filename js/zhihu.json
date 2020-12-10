@@ -1,0 +1,876 @@
+{
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "host": "api.vikingship.xyz",
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "info": {
+    "description": "This is a zheye backend swagger-ui html",
+    "version": "1.0.0",
+    "title": "者也后端文档 使用 swagger 搭建",
+    "contact": {
+      "email": "vikingmute@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "user",
+      "description": "关于用户的路由，登录，注册，获取当前用户等等"
+    },
+    {
+      "name": "column",
+      "description": "关于专栏的一些操作信息"
+    },
+    {
+      "name": "post",
+      "description": "关于文章的一些操作信息"
+    },
+    {
+      "name": "file",
+      "description": "关于文件上传的一些操作信息"
+    }
+  ],
+  "definitions": {
+    "Column": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "avatar": {
+          "$ref": "#/definitions/Image"
+        },
+        "author": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Post": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "excerpt": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "author": {
+          "$ref": "#/definitions/User"
+        },
+        "column": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CreatePost": {
+      "type": "object",
+      "required": [
+        "title",
+        "content",
+        "column",
+        "author"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "column": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "nickName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "column": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/api/user/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "发送请求, 用户登录",
+        "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "用户登录，需要提供用户的邮箱和密码",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "password"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "user's email"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "user's password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "data",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "新建用户",
+        "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "创建用户，需要提供用户的邮箱，昵称和密码",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "password",
+                "nickName"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "user's email"
+                },
+                "nickName": {
+                  "type": "string",
+                  "description": "user's nickname"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "user's password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "data",
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/current": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "获取当前用户登录信息",
+        "description": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "data",
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/{id}": {
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "summary": "更新单个用户信息",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user 用户的 ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "待更新用户数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts": {
+      "post": {
+        "tags": [
+          "post"
+        ],
+        "summary": "新建一篇文章",
+        "description": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "create post body data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "$ref": "#/definitions/Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/{id}": {
+      "get": {
+        "tags": [
+          "post"
+        ],
+        "summary": "获得单个文章信息",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "post 文章的 ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "$ref": "#/definitions/Post"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "post"
+        ],
+        "summary": "更新单个文章信息",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "post 文章的 ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "update post body data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "post title"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "post content"
+                },
+                "image": {
+                  "type": "string",
+                  "description": "上传的图片 ID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "$ref": "#/definitions/Post"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "post"
+        ],
+        "summary": "删除单个文章信息",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "post 文章的 ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "$ref": "#/definitions/Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/columns?currentPage={page}&pageSize={size}": {
+      "get": {
+        "tags": [
+          "column"
+        ],
+        "summary": "发送请求, 获得专栏列表",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "请求列表的页码 offset，默认为 1",
+            "default": "1",
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "请求列表的专栏个数，默认为 5",
+            "default": "5",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "data",
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "description": "total number"
+                    },
+                    "pageSize": {
+                      "type": "number",
+                      "description": "pageSize per page"
+                    },
+                    "currentPage": {
+                      "type": "number",
+                      "description": "currentPage"
+                    },
+                    "list": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Column"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/columns/{id}": {
+      "get": {
+        "tags": [
+          "column"
+        ],
+        "summary": "发送请求, 获得一个专栏详情",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "专栏 ID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "data",
+                  "$ref": "#/definitions/Column"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "column"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "更新单个专栏信息",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "column 专栏的 ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "update column body data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "column title"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "column description"
+                },
+                "avatar": {
+                  "type": "string",
+                  "description": "上传的图片 ID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "data",
+                  "$ref": "#/definitions/Column"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/columns/{id}/posts?currentPage={page}&pageSize={size}": {
+      "get": {
+        "tags": [
+          "post"
+        ],
+        "summary": "发送请求, 获得属于专栏的文章列表",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "column 专栏的 ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "请求列表的页码 offset，默认为 1",
+            "default": "1",
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "请求列表的专栏个数，默认为 5",
+            "default": "5",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "data",
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "description": "total number"
+                    },
+                    "pageSize": {
+                      "type": "number",
+                      "description": "pageSize per page"
+                    },
+                    "currentPage": {
+                      "type": "number",
+                      "description": "currentPage"
+                    },
+                    "list": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Post",
+                        "author": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/upload": {
+      "post": {
+        "tags": [
+          "file"
+        ],
+        "summary": "上传文件",
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "type": "file",
+            "description": "要上传的对应文件",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SUCCEED",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "description": "status"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "message"
+                },
+                "data": {
+                  "$ref": "#/definitions/Image"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
