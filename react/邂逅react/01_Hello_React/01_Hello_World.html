@@ -1,0 +1,32 @@
+<!--
+ * @file: description
+ * @author: zhongconghai
+ * @Date: 2021-01-26 21:57:07
+ * @LastEditors: zhongconghai
+ * @LastEditTime: 2021-01-26 22:03:13
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2 class="title"></h2>
+  <button class="btn">改变文本</button>
+  <script>
+    // 定义数据
+    let message = 'Hello World';
+    const titleEl = document.getElementsByClassName('title')[0];
+    titleEl.innerHTML = message;
+
+    // 点击按钮
+    const bitEl = document.getElementsByClassName('btn')[0];
+    bitEl.addEventListener("click", () => {
+      message = 'Hello React';
+      titleEl.innerHTML = message;
+    })
+  </script>
+</body>
+</html>
