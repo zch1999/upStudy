@@ -3,7 +3,7 @@
  * @author: zhongconghai
  * @Date: 2021-01-26 23:36:49
  * @LastEditors: zch1999
- * @LastEditTime: 2021-01-30 19:56:44
+ * @LastEditTime: 2021-01-30 20:11:28
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -22,24 +22,38 @@
 
   <!-- 注意事项：使用jsx，希望script中的jsx代码被解析，必须添加type="text/babel"属性-->
   <script type="text/babel">
-    let message = 'Hello World';
-    
-    function btnClick() {
-      message = "Hello React";
-      console.log(message);
-      render();
+
+    // App组件
+    class App extends React.Component {
+
+      constructor() {
+        super();
+        // this.message = "Hello World"
+        this.state = {
+          message: "Hello World"
+        }
+      }
+
+      render() {
+        return (
+          <div>
+            <h2>{this.state.message}</h2>
+            <button onClick={this.btnClick.bind(this)}>改变文本</button>
+          </div>
+        )
+      }
+
+      btnClick() {
+        this.setState({
+          message: 'Hello React'
+        })
+      }
     }
 
-    function render(){
-      ReactDOM.render( 
-      <div>
-        <h2>{message}</h2>
-        <button onClick={btnClick}>改变文本</button>
-      </div> ,
-      document.getElementById('app')) 
-    }
-
-    render();
+    // 渲染组件
+    ReactDOM.render( 
+    <App /> ,
+    document.getElementById('app')) 
   </script>
 
 </body>
