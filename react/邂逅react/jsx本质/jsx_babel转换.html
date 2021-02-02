@@ -1,0 +1,60 @@
+<!--
+ * @file: description
+ * @author: zhongconghai
+ * @Date: 2021-02-02 20:20:15
+ * @LastEditors: zch1999
+ * @LastEditTime: 2021-02-02 20:20:56
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>Header</div>
+  <div id="app">app</div>
+  <div>footer</div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+  <!-- 注意事项：使用jsx，希望script中的jsx代码被解析，必须添加type="text/babel"属性-->
+  <script type="text/babel">
+
+    // App组件
+    class App extends React.Component {
+
+      constructor() {
+        super();
+        // this.message = "Hello World"
+        this.state = {
+          message: "Hello World"
+        }
+      }
+
+      render() {
+        return (
+          <div>
+            <h2>{this.state.message}</h2>
+            <button onClick={this.btnClick.bind(this)}>改变文本</button>
+          </div>
+        )
+      }
+
+      btnClick() {
+        this.setState({
+          message: 'Hello React'
+        })
+      }
+    }
+
+    // 渲染组件
+    ReactDOM.render( 
+    <App /> ,
+    document.getElementById('app')) 
+  </script>
+
+</body>
+</html>
