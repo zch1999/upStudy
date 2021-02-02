@@ -2,8 +2,8 @@
  * @file: description
  * @author: zhongconghai
  * @Date: 2020-12-17 14:56:55
- * @LastEditors: zhongconghai
- * @LastEditTime: 2020-12-21 16:39:33
+ * @LastEditors: zch1999
+ * @LastEditTime: 2021-02-02 13:30:50
  */
 
 /**
@@ -21,5 +21,5 @@ function myNew(func, ...args) {
 	let tmp = func.apply(obj, args);
 	let isObj = typeof tmp === "object" && tmp !== null;
 	let isFunction = typeof tmp === "function";
-	return isFunction || isObj ? result : obj;
+	return isFunction || isObj ? tmp : obj;
 }
