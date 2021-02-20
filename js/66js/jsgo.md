@@ -2,8 +2,8 @@
  * @file: description
  * @author: zhongconghai
  * @Date: 2020-11-17 22:23:01
- * @LastEditors: zhongconghai
- * @LastEditTime: 2020-12-01 20:21:31
+ * @LastEditors: zch1999
+ * @LastEditTime: 2021-02-19 18:21:04
  -->
 
 1. 介绍一下 js 的数据类型有哪些,值是如何存储的
@@ -69,7 +69,7 @@
 
 14. JavaScript 原型，原型链？有什么特点？
 
-    - js 对象都有一个原型即*proto*,它指向原型对象的 prototype 属性，prototype 属性包括了 constroctor 指向实例的构造函数，prototype 的*proto*又指向它的原型对象
+    - js 对象都有一个原型即*proto*,它指向构造函数的 prototype 属性，也就是原型对象，prototype 属性包括了 constroctor 指向实例的构造函数，prototype 的*proto*又指向它的原型对象
 
 15. js 获取原型的方法？
 
