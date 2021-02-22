@@ -32,11 +32,18 @@
 
 9. cookie 的属性
 
-   - httponly
+   - httponly cookie 只允许在 http 请求中使用，不允许 js 脚本获取
    - sameSite
-   - Domain
-   - path
+     - lax 用户从外部导航至 URL 时发送 cookie，link 连接，frames 的调用
+     - none 任何请求下都会发送 cookie
+     - strict 只在访问相同站点是发送 cookie
+   - expires 表示一个过期时间
+   - secure 只有请求是通过 SSL 和 https 创建时， 才会被发送到服务端
+   - Domain 允许访问的跟域名
+   - path 路径一般是跟路径
 
-10. 事件委托 时间冒泡
+10. 事件委托 时间冒泡 怎阻止事件冒泡
 
 11. js 为什么会阻塞 DOM 解析
+
+12. localStorage 可以非同源共享吗？不可以，只允许同源页面访问

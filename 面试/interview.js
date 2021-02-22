@@ -3,13 +3,16 @@
  * @author: zhongconghai
  * @Date: 2021-02-22 17:17:09
  * @LastEditors: zch1999
- * @LastEditTime: 2021-02-22 17:18:18
+ * @LastEditTime: 2021-02-23 01:26:44
  */
-let A = {
-	b: function () {
-		console.log(this);
-	},
-};
+// "use strict";
+function foo() {
+	console.log(this.a);
+}
 
-let a = new A();
-a.b();
+var obj = {
+	a: 2,
+	foo: foo,
+};
+console.log(obj.foo());
+var bar = obj.foo;
