@@ -3,7 +3,7 @@
  * @author: zhongconghai
  * @Date: 2021-02-08 21:53:04
  * @LastEditors: zch1999
- * @LastEditTime: 2021-02-08 21:55:00
+ * @LastEditTime: 2021-02-26 15:20:57
  */
 
 /** 格式化给乘除加括号 2+1*2*4-2/4 ->2+(1*2*4)-(2/4) */
@@ -30,3 +30,4 @@ function format(str) {
 }
 
 console.log(format("11+2-3*4+5/2*4+10/5"));
+let a = [];

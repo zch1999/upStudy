@@ -38,8 +38,38 @@ function limitTask(tasks, limit) {
 		run();
 	});
 }
+
+function limitTask1(tasks, limit) {
+	return new Promise((resolve, reject) => {
+		let res = [];
+		let running = 0;
+		let total = 0;
+		let i = 0;
+		function run() {
+			if (total == tasks.length) {
+				resolve(res);
+			}
+			if (running >= limit || i > tasks.length - 1) {
+				return;
+			}
+			let task = tasks[i]();
+			let currentI = i;
+			console.log(currentI, "run");
+			task.then((r) => {
+				res[currentI] = r;
+				total++;
+				running--;
+				run();
+			});
+			i++;
+			running++;
+			run();
+		}
+		run();
+	});
+}
 console.time("1");
-limitTask([createTask(2000), createTask(2000), createTask(1000)], 3).then(
+limitTask1([createTask(2000), createTask(2000), createTask(1000)], 2).then(
 	(res) => {
 		console.timeEnd("1");
 		console.log(res);

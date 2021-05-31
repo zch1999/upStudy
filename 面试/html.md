@@ -43,7 +43,9 @@
    - path 路径一般是跟路径
 
 10. 事件委托 时间冒泡 怎阻止事件冒泡
-
+    阻止事件冒泡： ie： cancelbubble = true 非 ie： e.stopPropgation
+    阻止默认事件：e.preventDefault（）ie: returnValue = false;
+    addeventlistener 第三个参数为 true 在捕获时执行函数
 11. js 为什么会阻塞 DOM 解析
 
 12. localStorage 可以非同源共享吗？不可以，只允许同源页面访问

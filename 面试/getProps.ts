@@ -3,7 +3,7 @@
  * @author: zhongconghai
  * @Date: 2021-02-24 00:40:50
  * @LastEditors: zch1999
- * @LastEditTime: 2021-02-24 00:59:51
+ * @LastEditTime: 2021-02-24 17:33:40
  */
 function getProps<T extends object>(obj: T, key: keyof T): T[keyof T] {
 	return obj[key];
@@ -16,4 +16,5 @@ var obj = {
 };
 type x = keyof typeof obj;
 console.log(getProps(obj, "name"));
-getProps(obj, 123);
+// getProps(obj, 123); // error
+console.log("name".slice(1));
