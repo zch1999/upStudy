@@ -1,0 +1,15 @@
+{
+	"version": "1.0.0",
+	"name": "first",
+	"ie": 10,
+	"miniapp_only": false,
+	"disable_expand": false,
+	"launchimg": "assets/launchimg.png",
+	"files": [
+		"cube.tpl",
+		"cube.css",
+		"cube.js",
+		"assets/launchimg.png"
+	],
+	"id": "first"
+}
